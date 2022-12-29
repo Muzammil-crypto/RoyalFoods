@@ -469,8 +469,8 @@ const Home = ({ navigation }) => {
     return (
       <View style={{ padding: SIZES.padding * 2 }}>
         <StatusBar />
-        <Text style={{ ...FONTS.h1 }}>Main</Text>
-        <Text style={{ ...FONTS.h1 }}>Categories</Text>
+        <Text style={{ ...FONTS.h1 }}>Main </Text>
+        <Text style={{ ...FONTS.h2 }}>Categories</Text>
 
         <FlatList
           data={categories}
