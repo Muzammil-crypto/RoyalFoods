@@ -7,7 +7,7 @@ import {
 import Svg, { Path } from "react-native-svg";
 import { isIphoneX } from "react-native-iphone-x-helper";
 
-import { Home } from "../screens";
+import { Home, Restaurant } from "../screens";
 
 import { COLORS, icons } from "../constants";
 
@@ -177,6 +177,29 @@ const Tabs = () => {
       <Tab.Screen
         name="User"
         component={Home}
+        options={{
+          headerStyle: { backgroundColor: COLORS.primary },
+          headerTitleStyle: { color: COLORS.white },
+          headerTitleAlign: "center",
+          headerTitle: "Bawarchi Kitchen",
+
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={icons.user}
+              resizeMode="contain"
+              style={{
+                width: 25,
+                height: 25,
+                tintColor: focused ? COLORS.primary : COLORS.secondary,
+              }}
+            />
+          ),
+          tabBarButton: (props) => <TabBarCustomButton {...props} />,
+        }}
+      />
+      <Tab.Screen
+        name="Restaurant"
+        component={Restaurant}
         options={{
           headerStyle: { backgroundColor: COLORS.primary },
           headerTitleStyle: { color: COLORS.white },

@@ -95,8 +95,8 @@ const Restaurant = ({ route, navigation }) => {
             source={icons.back}
             resizeMode="contain"
             style={{
-              width: 30,
-              height: 30,
+              width: 20,
+              height: 25,
             }}
           />
         </TouchableOpacity>

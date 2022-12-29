@@ -13,8 +13,9 @@ import {
 import { icons, images, SIZES, COLORS, FONTS } from "../constants";
 
 const Home = ({ navigation }) => {
-  // Dummy Datas
+  //API Calling Here
 
+  // Dummy Datas
   const initialCurrentLocation = {
     streetName: "Kuching",
     gps: {
