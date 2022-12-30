@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   Image,
+  TextInput,
   ImageBackground,
   TouchableOpacity,
   ScrollView,
@@ -10,85 +11,90 @@ import {
 } from "react-native";
 import { COLORS } from "../../constants";
 
-export const LoginScreen = () => {
-  return (
-    <ImageBackground
-      imageStyle={{
-        opacity: 0.777,
-        backgroundColor: "black",
-      }}
-      style={{
-        height: "100%",
-        justifyContent: "center",
-        // marginVertical: 50,
-      }}
-      source={{
-        uri: "https://i.pinimg.com/originals/f4/6d/ac/f46dac364207e409b17506fc4543bc0e.jpg",
-      }}
-    >
-      <ScrollView style={styles.container}>
-        <View style={styles.logoContainer}>
-          <View style={styles.formContainer}>
-            <Image
-              source={require("../../assets/intro.png")}
-              style={styles.logo}
-            />
-          </View>
-        </View>
+export const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Continue </Text>
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.logoContainer}>
+        <Image
+          source={require("../../assets/intro.png")} // replace with your own logo image file
+          style={styles.logo}
+        />
+        <Text style={styles.title1}>Welcome</Text>
+        <Text style={styles.title}>Please login here!</Text>
+      </View>
+      <View style={styles.formContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          onChangeText={(text) => setEmail(text)}
+          value={email}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          secureTextEntry
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+        />
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Home")}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Log In</Text>
         </TouchableOpacity>
-      </ScrollView>
-    </ImageBackground>
+      </View>
+    </ScrollView>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // backgroundColor: COLORS.white, // choose your own login screen background color
-    // margin: 10,
-    borderRadius: 18,
+    flex: 1,
+    backgroundColor: "#ffffff", // choose your own login screen background color
   },
   logoContainer: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 170,
+    marginTop: 80,
   },
   logo: {
-    flex: 1,
-    width: 300,
-    height: 300,
-    // alignSelf: "center",
+    marginVertical: 20,
+    width: 200,
+    height: 200,
   },
   title: {
-    fontSize: 24,
+    fontSize: 18,
+    // fontWeight: "bold",
+    color: "#000000", // choose your own login screen text color
+    marginTop: 10,
+  },
+  title1: {
+    fontSize: 22,
     fontWeight: "bold",
-    color: COLORS.white, // choose your own login screen text color
+    color: "#000000", // choose your own login screen text color
     marginTop: 10,
   },
   formContainer: {
     padding: 20,
-    width: "100%",
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
   },
   input: {
-    height: 40,
-    backgroundColor: "#dddddd", // choose your own input field background color
+    color: COLORS.darkgray,
+    borderWidth: StyleSheet.hairlineWidth,
+    height: 45,
     marginBottom: 10,
+    borderRadius: 12,
     padding: 10,
-    color: "#000000", // choose your own input field text color
+    borderColor: COLORS.primary,
+    marginVertical: 10, // choose your own input field text color
   },
   button: {
+    borderRadius: 12,
+    marginTop: 100,
     backgroundColor: COLORS.primary, // choose your own login button background color
     padding: 15,
-    margin: 15,
     alignItems: "center",
-    borderRadius: 12,
-    marginVertical: 100,
   },
   buttonText: {
     fontSize: 16,
