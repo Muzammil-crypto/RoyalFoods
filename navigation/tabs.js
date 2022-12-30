@@ -197,29 +197,6 @@ const Tabs = () => {
           tabBarButton: (props) => <TabBarCustomButton {...props} />,
         }}
       />
-      <Tab.Screen
-        name="Restaurant"
-        component={Restaurant}
-        options={{
-          headerStyle: { backgroundColor: COLORS.primary },
-          headerTitleStyle: { color: COLORS.white },
-          headerTitleAlign: "center",
-          headerTitle: "Bawarchi Kitchen",
-
-          tabBarIcon: ({ focused }) => (
-            <Image
-              source={icons.user}
-              resizeMode="contain"
-              style={{
-                width: 25,
-                height: 25,
-                tintColor: focused ? COLORS.primary : COLORS.secondary,
-              }}
-            />
-          ),
-          tabBarButton: (props) => <TabBarCustomButton {...props} />,
-        }}
-      />
     </Tab.Navigator>
   );
 };
