@@ -10,6 +10,6 @@ In this we built a good looking Food Delivery App based on the design created by
 
 ## Contributors
 
-<a href="https://avatars.githubusercontent.com/u/57823963?v=4">
+<a href="https://scontent.flhe10-1.fna.fbcdn.net/v/t39.30808-6/277167481_1772728692932940_5243875438215072668_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeEL-WE5Q2jW1gAam2GV4GaA9U8rwauwLUb1TyvBq7AtRuA2Aro5fU5ljdKymaDb0cnF5G5s-b-pvopwIZSJ2EYp&_nc_ohc=jI-hevUdupQAX9htL2U&_nc_ht=scontent.flhe10-1.fna&oh=00_AfA_FXHHO7WIzXBOyFsVEt4bQ-YpzOVkA2O735itn92KZg&oe=63B515AB">
   <img src="https://contributors-img.web.app/image?repo=byprogrammers/lets-code-react-native" />
 </a>
