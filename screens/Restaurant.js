@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -17,12 +17,15 @@ const Restaurant = ({ route, navigation }) => {
   const [restaurant, setRestaurant] = React.useState(null);
   const [currentLocation, setCurrentLocation] = React.useState(null);
   const [orderItems, setOrderItems] = React.useState([]);
+  const [restaurantLocation, setRestaurantLocation] = useState(null);
 
   React.useEffect(() => {
-    let { item, currentLocation } = route.params;
+    let { item, currentLocation, restaurantLocation } = route.params;
 
     setRestaurant(item);
     setCurrentLocation(currentLocation);
+    setRestaurantLocation(restaurantLocation);
+    console.log("CLOCATION ON RESTAURENT", restaurantLocation, currentLocation);
   });
 
   function editOrder(action, menuId, price) {
@@ -93,12 +96,12 @@ const Restaurant = ({ route, navigation }) => {
           { useNativeDriver: false }
         )}
       >
-        {restaurant?.menu.map((item, index) => (
+        {restaurant?.menus?.map((item, index) => (
           <View key={`menu-${index}`} style={{ alignItems: "center" }}>
             <View style={{ height: SIZES.height * 0.35 }}>
               {/* Food Image */}
               <Image
-                source={item.photo}
+                source={{ uri: item.photo }}
                 resizeMode="cover"
                 style={{
                   width: SIZES.width,
@@ -126,7 +129,7 @@ const Restaurant = ({ route, navigation }) => {
                     borderTopLeftRadius: 25,
                     borderBottomLeftRadius: 25,
                   }}
-                  onPress={() => editOrder("-", item.menuId, item.price)}
+                  onPress={() => editOrder("-", item.id, item.price)}
                 >
                   <Text style={{ ...FONTS.body1 }}>-</Text>
                 </TouchableOpacity>
@@ -139,9 +142,7 @@ const Restaurant = ({ route, navigation }) => {
                     justifyContent: "center",
                   }}
                 >
-                  <Text style={{ ...FONTS.h2 }}>
-                    {getOrderQty(item.menuId)}
-                  </Text>
+                  <Text style={{ ...FONTS.h2 }}>{getOrderQty(item.id)}</Text>
                 </View>
 
                 <TouchableOpacity
@@ -153,7 +154,7 @@ const Restaurant = ({ route, navigation }) => {
                     borderTopRightRadius: 25,
                     borderBottomRightRadius: 25,
                   }}
-                  onPress={() => editOrder("+", item.menuId, item.price)}
+                  onPress={() => editOrder("+", item.id, item.price)}
                 >
                   <Text style={{ ...FONTS.body1 }}>+</Text>
                 </TouchableOpacity>
@@ -221,7 +222,7 @@ const Restaurant = ({ route, navigation }) => {
             height: SIZES.padding,
           }}
         >
-          {restaurant?.menu.map((item, index) => {
+          {restaurant?.menus?.map((item, index) => {
             const opacity = dotPosition.interpolate({
               inputRange: [index - 1, index, index + 1],
               outputRange: [0.3, 1, 0.3],
@@ -345,6 +346,7 @@ const Restaurant = ({ route, navigation }) => {
                 navigation.navigate("OrderDelivery", {
                   restaurant: restaurant,
                   currentLocation: currentLocation,
+                  restaurantLocation: restaurantLocation,
                 })
               }
             >
