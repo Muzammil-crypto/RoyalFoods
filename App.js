@@ -6,6 +6,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Restaurant, OrderDelivery } from "./screens";
 import Tabs from "./navigation/tabs";
 import { COLORS } from "./constants";
+import { LoginScreen } from "./screens/Auth/LoginScreen";
+import { SplashScreen } from "./screens/splash/SplashScreen";
 
 const Stack = createStackNavigator();
 
@@ -16,9 +18,20 @@ const App = () => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName={"Home"}
+        initialRouteName={"SplashScreen"}
       >
         <Stack.Screen name="Home" component={Tabs} />
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreen}
+          options={{
+            headerShown: false,
+            headerStyle: { backgroundColor: COLORS.primary },
+            headerTitleStyle: { color: COLORS.white },
+            headerTitleAlign: "center",
+            headerTitle: "Login",
+          }}
+        />
         <Stack.Screen
           name="Restaurant"
           component={Restaurant}
