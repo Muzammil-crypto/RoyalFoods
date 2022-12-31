@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
   View,
@@ -8,15 +9,63 @@ import {
   TouchableOpacity,
   ScrollView,
   StyleSheet,
+  AsyncStorage,
 } from "react-native";
 import { COLORS } from "../../constants";
+export const storeData = async (value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem("@storage_Key", jsonValue);
+    return value;
+  } catch (e) {
+    return e;
+  }
+};
 
+export const getData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("@storage_Key");
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    return e;
+  }
+};
+export var data = getData("@storage_Key");
 export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUserName] = useState("");
+  const [finalresponse, setResponse] = useState([]);
+  const postUser = async () => {
+    const response = await fetch("http://192.168.43.186:1337/auth/local", {
+      method: "POST",
+
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        identifier: email,
+        password: password,
+      }),
+    });
+    const json = await response.json();
+    const data = await storeData(json);
+
+    const token = await getData("@storage_Key");
+
+    setResponse(json);
+    navigation.navigate("Home", {
+      finalresponse,
+    });
+  };
+  function onLogin() {
+    postUser();
+  }
 
   return (
     <ScrollView style={styles.container}>
+      <StatusBar />
       <View style={styles.logoContainer}>
         <Image
           source={require("../../assets/intro.png")} // replace with your own logo image file
@@ -39,10 +88,7 @@ export const LoginScreen = ({ navigation }) => {
           onChangeText={(text) => setPassword(text)}
           value={password}
         />
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Home")}
-          style={styles.button}
-        >
+        <TouchableOpacity onPress={onLogin} style={styles.button}>
           <Text style={styles.buttonText}>Log In</Text>
         </TouchableOpacity>
       </View>

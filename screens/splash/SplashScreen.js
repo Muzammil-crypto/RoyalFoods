@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import React from "react";
 import {
   View,
@@ -26,6 +27,8 @@ export const SplashScreen = ({ navigation }) => {
         uri: "https://i.pinimg.com/originals/f4/6d/ac/f46dac364207e409b17506fc4543bc0e.jpg",
       }}
     >
+      <StatusBar />
+
       <ScrollView style={styles.container}>
         <View style={styles.logoContainer}>
           <View style={styles.formContainer}>

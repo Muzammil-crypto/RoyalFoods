@@ -10,7 +10,8 @@ import { isIphoneX } from "react-native-iphone-x-helper";
 import { Home, Restaurant } from "../screens";
 
 import { COLORS, icons } from "../constants";
-
+// import UserProfile from "../screens/profile/profileScreen";
+import UserProfile, { getDataAll } from "../screens/profile/profileScreen";
 const Tab = createBottomTabNavigator();
 
 const TabBarCustomButton = ({ accessibilityState, children, onPress }) => {
@@ -175,8 +176,8 @@ const Tabs = () => {
       />
 
       <Tab.Screen
-        name="User"
-        component={Home}
+        name="UserProfile"
+        component={UserProfile}
         options={{
           headerStyle: { backgroundColor: COLORS.primary },
           headerTitleStyle: { color: COLORS.white },
@@ -184,6 +185,7 @@ const Tabs = () => {
           headerTitle: "Bawarchi Kitchen",
 
           tabBarIcon: ({ focused }) => (
+            // <TouchableOpacity onPress={getDataAll()}>
             <Image
               source={icons.user}
               resizeMode="contain"
@@ -193,6 +195,7 @@ const Tabs = () => {
                 tintColor: focused ? COLORS.primary : COLORS.secondary,
               }}
             />
+            // </TouchableOpacity>
           ),
           tabBarButton: (props) => <TabBarCustomButton {...props} />,
         }}

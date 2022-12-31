@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
   View,
@@ -17,11 +18,10 @@ export const RegisterScreen = ({ navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
+      <StatusBar />
+
       <View style={styles.logoContainer}>
-        <Image
-          source={require("../../assets/intro.png")} // replace with your own logo image file
-          style={styles.logo}
-        />
+        <Image source={require("../../assets/intro.png")} style={styles.logo} />
         <Text style={styles.title1}>Welcome</Text>
         <Text style={styles.title}>Please login here!</Text>
       </View>
