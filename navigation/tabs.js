@@ -12,6 +12,7 @@ import { Home, Restaurant } from "../screens";
 import { COLORS, icons } from "../constants";
 // import UserProfile from "../screens/profile/profileScreen";
 import UserProfile, { getDataAll } from "../screens/profile/profileScreen";
+import { WishListScreen } from "../screens/WishListScreen";
 const Tab = createBottomTabNavigator();
 
 const TabBarCustomButton = ({ accessibilityState, children, onPress }) => {
@@ -152,8 +153,8 @@ const Tabs = () => {
       />
 
       <Tab.Screen
-        name="Like"
-        component={Home}
+        name="WishListScreen"
+        component={WishListScreen}
         options={{
           headerStyle: { backgroundColor: COLORS.primary },
           headerTitleStyle: { color: COLORS.white },
