@@ -14,7 +14,38 @@ import { COLORS } from "../../constants";
 
 export const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [finalresponse, setResponse] = useState([]);
+
+  const postUser = async () => {
+    const response = await fetch(
+      "http://192.168.43.186:1337/auth/local/register",
+      {
+        method: "POST",
+
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: name,
+          email: email,
+          password: password,
+        }),
+      }
+    );
+    const json = await response.json();
+    // const data = await storeData(json);
+
+    // const token = await getData("@storage_Key");
+
+    setResponse(json);
+    navigation.navigate("LoginScreen");
+  };
+  function onRegister() {
+    postUser();
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -23,14 +54,14 @@ export const RegisterScreen = ({ navigation }) => {
       <View style={styles.logoContainer}>
         <Image source={require("../../assets/intro.png")} style={styles.logo} />
         <Text style={styles.title1}>Welcome</Text>
-        <Text style={styles.title}>Please login here!</Text>
+        <Text style={styles.title}>Please Register Yourself here!</Text>
       </View>
       <View style={styles.formContainer}>
         <TextInput
           style={styles.input}
           placeholder="Name"
-          onChangeText={(text) => setEmail(text)}
-          value={email}
+          onChangeText={(text) => setName(text)}
+          value={name}
         />
         <TextInput
           style={styles.input}
@@ -46,9 +77,13 @@ export const RegisterScreen = ({ navigation }) => {
           value={password}
         />
         <TouchableOpacity
-          onPress={() => navigation.navigate("LoginScreen")}
-          style={styles.button}
+          onPress={() => {
+            navigation.navigate("LoginScreen");
+          }}
         >
+          <Text style={styles.linkText}>Don't have an account? Register</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={onRegister} style={styles.button}>
           <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
       </View>
@@ -64,6 +99,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 70,
+  },
+  linkText: {
+    fontSize: 10,
+    alignSelf: "center",
+    // fontWeight: "bold",
+    color: COLORS.primary, // choose your own login screen text color
+    // marginTop: 10,
   },
   logo: {
     marginVertical: 20,

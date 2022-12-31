@@ -1,24 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import {
-  ScrollView,
-  View,
-  Text,
-  Image,
-  Button,
-  AsyncStorage,
-} from "react-native";
+import { ScrollView, View, Text, Image, AsyncStorage } from "react-native";
+import { Button } from "../../components/Button";
 import { data } from "../Auth/LoginScreen";
 import { getData, storeData } from "../Auth/LoginScreen";
-// export const getData = async () => {
-//   try {
-//     const jsonValue = await AsyncStorage.getItem("@storage_Key");
-//     return jsonValue != null ? JSON.parse(jsonValue) : null;
-//   } catch (e) {
-//     return e;
-//   }
-// };
+import moment from "moment";
+
 export const getDataAll = async () => {
   const token = await getData("@storage_Key");
   console.log(token);
@@ -30,7 +18,9 @@ export default UserProfile = ({ navigation }) => {
   useEffect(() => {
     getDataAll().then((data) => setUser(data));
   }, []);
-  console.log({ user: user.user.email });
+  console.log({ user: user?.user?.email });
+  var dateString = moment.unix(user?.user?.created_at).format("MM/DD/YYYY");
+
   return (
     <ScrollView>
       <View style={styles.headerContainer}>
@@ -40,17 +30,17 @@ export default UserProfile = ({ navigation }) => {
           }}
           style={styles.headerImage}
         />
-        <Text style={styles.headerText}>{user.user.username}</Text>
+        <Text style={styles.headerText}>{user?.user?.username}</Text>
       </View>
       <View style={styles.sectionContainer}>
         <Text style={styles.sectionTitle}>Contact Information</Text>
         <View style={styles.infoContainer}>
           <Text style={styles.infoLabel}>Email:</Text>
-          <Text style={styles.infoText}>{user.user.email}</Text>
+          <Text style={styles.infoText}>{user?.user?.email}</Text>
         </View>
         <View style={styles.infoContainer}>
-          <Text style={styles.infoLabel}>Phone:</Text>
-          <Text style={styles.infoText}>(123) 456-7890</Text>
+          <Text style={styles.infoLabel}>User From:</Text>
+          <Text style={styles.infoText}>{user?.user?.created_at}</Text>
         </View>
       </View>
       <View style={styles.sectionContainer}>
@@ -64,9 +54,7 @@ export default UserProfile = ({ navigation }) => {
           pariatur.
         </Text>
       </View>
-      <View style={styles.buttonContainer}>
-        <Button title="Go Back" onPress={() => {}} />
-      </View>
+      {/* <Button title={"COME"}></Button> */}
     </ScrollView>
   );
 };

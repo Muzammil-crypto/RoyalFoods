@@ -40,7 +40,7 @@ export const SplashScreen = ({ navigation }) => {
         </View>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate("RegisterScreen")}
+          onPress={() => navigation.replace("RegisterScreen")}
           style={styles.button}
         >
           <Text style={styles.buttonText}>Continue </Text>

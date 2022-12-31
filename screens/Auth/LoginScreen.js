@@ -55,9 +55,7 @@ export const LoginScreen = ({ navigation }) => {
     const token = await getData("@storage_Key");
 
     setResponse(json);
-    navigation.navigate("Home", {
-      finalresponse,
-    });
+    navigation.replace("Home");
   };
   function onLogin() {
     postUser();
@@ -88,6 +86,14 @@ export const LoginScreen = ({ navigation }) => {
           onChangeText={(text) => setPassword(text)}
           value={password}
         />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("RegisterScreen");
+          }}
+        >
+          <Text style={styles.linkText}>Don't have an account? Register</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity onPress={onLogin} style={styles.button}>
           <Text style={styles.buttonText}>Log In</Text>
         </TouchableOpacity>
@@ -119,8 +125,15 @@ const styles = StyleSheet.create({
   title1: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "#000000", // choose your own login screen text color
+    color: COLORS.primary, // choose your own login screen text color
     marginTop: 10,
+  },
+  linkText: {
+    fontSize: 10,
+    alignSelf: "center",
+    // fontWeight: "bold",
+    color: COLORS.primary, // choose your own login screen text color
+    // marginTop: 10,
   },
   formContainer: {
     padding: 20,
@@ -137,7 +150,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 12,
-    marginTop: 100,
+    marginTop: 80,
     backgroundColor: COLORS.primary, // choose your own login button background color
     padding: 15,
     alignItems: "center",
