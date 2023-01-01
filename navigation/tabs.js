@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, TouchableOpacity } from "react-native";
+import { View, Image, TouchableOpacity, Text } from "react-native";
 import {
   createBottomTabNavigator,
   BottomTabBar,
@@ -7,7 +7,7 @@ import {
 import Svg, { Path } from "react-native-svg";
 import { isIphoneX } from "react-native-iphone-x-helper";
 
-import { Home, Restaurant } from "../screens";
+import { Home, Restaurant, SearchScreen } from "../screens";
 
 import { COLORS, icons } from "../constants";
 // import UserProfile from "../screens/profile/profileScreen";
@@ -87,7 +87,7 @@ const CustomTabBar = (props) => {
   }
 };
 
-const Tabs = () => {
+const Tabs = ({ navigation }) => {
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -130,7 +130,7 @@ const Tabs = () => {
 
       <Tab.Screen
         name="Search"
-        component={Home}
+        component={SearchScreen}
         options={{
           headerStyle: { backgroundColor: COLORS.primary },
           headerTitleStyle: { color: COLORS.white },
