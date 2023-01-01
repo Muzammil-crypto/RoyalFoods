@@ -2,14 +2,11 @@ import React from "react";
 import { Component } from "react";
 import { useState } from "react";
 import { View, Image, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { COLORS, SIZES, FONTS, icons } from "../constants";
 
 export const Favourits = ({ favourit, navigation }) => {
-  //   const [itemComing, setItemComing] = useState([]);
-  let { data } = favourit;
-
   return (
-    // <Text>{favourit.name}</Text>
     <TouchableOpacity style={{ margin: SIZES.padding * 2 }}>
       {/* Image */}
       <View
