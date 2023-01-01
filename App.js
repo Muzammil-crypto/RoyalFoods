@@ -77,7 +77,6 @@ const App = () => {
             headerTitle: "Bawarchi Kitchen",
           }}
         />
-        {/* <Stack.Screen name="OrderDelivery" component={OrderDelivery} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

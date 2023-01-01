@@ -9,6 +9,7 @@ import {
   ScrollView,
   StyleSheet,
 } from "react-native";
+import Button from "../../components/Button";
 import { COLORS } from "../../constants";
 
 export const SplashScreen = ({ navigation }) => {
@@ -39,12 +40,15 @@ export const SplashScreen = ({ navigation }) => {
           </View>
         </View>
 
-        <TouchableOpacity
+        <Button
+          style={{ marginTop: "40%" }}
+          onPress={() => navigation.replace("LoginScreen")}
+          title={"Login"}
+        />
+        <Button
           onPress={() => navigation.replace("RegisterScreen")}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Continue </Text>
-        </TouchableOpacity>
+          title={"Register"}
+        />
       </ScrollView>
     </ImageBackground>
   );
@@ -60,12 +64,13 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 170,
+    marginTop: 10,
   },
   logo: {
     flex: 1,
     width: 300,
     height: 300,
+    marginTop: "20%",
     // alignSelf: "center",
   },
   title: {
@@ -94,7 +99,7 @@ const styles = StyleSheet.create({
     margin: 15,
     alignItems: "center",
     borderRadius: 12,
-    marginVertical: 100,
+    marginVertical: 10,
   },
   buttonText: {
     fontSize: 16,
