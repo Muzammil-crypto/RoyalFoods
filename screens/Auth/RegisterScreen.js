@@ -100,7 +100,7 @@ export const RegisterScreen = ({ navigation }) => {
             navigation.navigate("LoginScreen");
           }}
         >
-          <Text style={styles.linkText}>Already have an account? Login!</Text>
+          <Text style={styles.linkText}>Already an account? Login!</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={onRegister} style={styles.button}>
           <Text style={styles.buttonText}>Register</Text>

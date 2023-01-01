@@ -2,19 +2,23 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { ScrollView, View, Text, Image, AsyncStorage } from "react-native";
-import Button from "../../components/Button";
-import { getData } from "../Auth/LoginScreen";
+// import Button from "../../components/Button";
+import { data, getData } from "../Auth/LoginScreen";
 
 export const getDataAll = async ({ navigation }) => {
   const token = await getData("@storage_Key");
-  console.log(token);
+  console.log("ATA", token.user);
   return token;
 };
 export default UserProfile = ({ navigation }) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    getDataAll().then((data) => setUser(data));
+    // setUser(data);
+    // console.log({ data: data });
+    getData("@storage_Key").then((data) => {
+      setUser(data);
+    });
   }, []);
 
   return (
@@ -50,10 +54,10 @@ export default UserProfile = ({ navigation }) => {
           pariatur.
         </Text>
       </View>
-      <Button
+      {/* <Button
         onPress={() => navigation.replace("SplashScreen")}
         title={"Logout"}
-      />
+      /> */}
     </ScrollView>
   );
 };

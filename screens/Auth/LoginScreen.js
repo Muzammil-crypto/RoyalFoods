@@ -51,13 +51,12 @@ export const LoginScreen = ({ navigation }) => {
       }),
     });
     const json = await response.json();
-    console.log({ json: json?.error });
+    // console.log({ json: json?.error });
     const data = await storeData(json);
 
     const token = await getData("@storage_Key");
-    if (json) {
-      setResponse(json);
-    }
+
+    setResponse(json);
   };
 
   function onLogin() {
