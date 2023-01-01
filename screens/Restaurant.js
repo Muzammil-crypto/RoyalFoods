@@ -18,6 +18,7 @@ const Restaurant = ({ route, navigation }) => {
   const [currentLocation, setCurrentLocation] = React.useState(null);
   const [orderItems, setOrderItems] = React.useState([]);
   const [restaurantLocation, setRestaurantLocation] = useState(null);
+  const [isClicked, setIsClicked] = React.useState(false);
 
   React.useEffect(() => {
     let { item, currentLocation, restaurantLocation } = route.params;
@@ -25,7 +26,7 @@ const Restaurant = ({ route, navigation }) => {
     setRestaurant(item);
     setCurrentLocation(currentLocation);
     setRestaurantLocation(restaurantLocation);
-    console.log("CLOCATION ON RESTAURENT", restaurantLocation, currentLocation);
+    // console.log("CLOCATION ON RESTAURENT", restaurantLocation, currentLocation);
   });
 
   function editOrder(action, menuId, price) {
@@ -82,7 +83,12 @@ const Restaurant = ({ route, navigation }) => {
 
     return total.toFixed(2);
   }
-
+  function addToWishList(item) {
+    setIsClicked(!isClicked);
+    navigation.navigate("WishListScreen", {
+      item,
+    });
+  }
   function renderFoodInfo() {
     return (
       <Animated.ScrollView
@@ -203,6 +209,19 @@ const Restaurant = ({ route, navigation }) => {
                 {item.calories.toFixed(2)} cal
               </Text>
             </View>
+            <TouchableOpacity onPress={() => addToWishList(item)}>
+              <Image
+                source={icons.like}
+                resizeMode="contain"
+                style={{
+                  width: 30,
+                  height: 30,
+                  marginTop: 10,
+                  marginVertical: 30,
+                  tintColor: isClicked ? COLORS.primary : COLORS.secondary,
+                }}
+              />
+            </TouchableOpacity>
           </View>
         ))}
       </Animated.ScrollView>

@@ -19,7 +19,7 @@ const App = () => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName={"SplashScreen"}
+        initialRouteName={"Home"}
       >
         <Stack.Screen name="Home" component={Tabs} />
         <Stack.Screen

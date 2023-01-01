@@ -159,7 +159,7 @@ const Tabs = () => {
           headerStyle: { backgroundColor: COLORS.primary },
           headerTitleStyle: { color: COLORS.white },
           headerTitleAlign: "center",
-          headerTitle: "Bawarchi Kitchen",
+          headerTitle: "Wish Items",
 
           tabBarIcon: ({ focused }) => (
             <Image
@@ -183,10 +183,9 @@ const Tabs = () => {
           headerStyle: { backgroundColor: COLORS.primary },
           headerTitleStyle: { color: COLORS.white },
           headerTitleAlign: "center",
-          headerTitle: "Bawarchi Kitchen",
+          headerTitle: "Profile",
 
           tabBarIcon: ({ focused }) => (
-            // <TouchableOpacity onPress={getDataAll()}>
             <Image
               source={icons.user}
               resizeMode="contain"
