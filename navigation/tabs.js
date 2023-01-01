@@ -90,7 +90,7 @@ const CustomTabBar = (props) => {
 const Tabs = ({ navigation }) => {
   return (
     <Tab.Navigator
-      tabBarOptions={{
+      screenOptions={{
         showLabel: false,
         style: {
           position: "absolute",

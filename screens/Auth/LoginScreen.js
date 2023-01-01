@@ -5,12 +5,13 @@ import {
   Text,
   Image,
   TextInput,
-  ImageBackground,
   TouchableOpacity,
   ScrollView,
   StyleSheet,
+  Alert,
   AsyncStorage,
 } from "react-native";
+// import { ActivityIndicator } from "react-native-paper";
 import { COLORS } from "../../constants";
 export const storeData = async (value) => {
   try {
@@ -50,17 +51,31 @@ export const LoginScreen = ({ navigation }) => {
       }),
     });
     const json = await response.json();
+    console.log({ json: json?.error });
     const data = await storeData(json);
 
     const token = await getData("@storage_Key");
-
-    setResponse(json);
-    navigation.replace("Home");
+    if (json) {
+      setResponse(json);
+    }
   };
+
   function onLogin() {
+    console.log({ finalresponse: finalresponse.error, finalresponse });
     postUser();
   }
-
+  if (finalresponse?.error) {
+    return Alert.alert("Error Log", "Please enter valid credentials!", [
+      {
+        text: "Cancel",
+        onPress: () => navigation.replace("LoginScreen"),
+        style: "cancel",
+      },
+      { text: "OK", onPress: () => navigation.replace("LoginScreen") },
+    ]);
+  } else if (finalresponse?.jwt) {
+    navigation.replace("Home");
+  }
   return (
     <ScrollView style={styles.container}>
       <StatusBar />

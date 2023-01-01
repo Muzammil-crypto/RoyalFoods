@@ -8,8 +8,9 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
+  TextInput,
 } from "react-native";
-import { TextInput } from "react-native-paper";
+// import { TextInput } from "react-native-paper";
 
 import { icons, SIZES, COLORS, FONTS } from "../constants";
 
@@ -286,10 +287,21 @@ const Home = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <TextInput
-        placeholder="Search"
+        // inlineImageLeft=""
+        style={{
+          padding: 12,
+          //   flex: 1,
+          marginTop: 20,
+          marginRight: 20,
+          marginLeft: 20,
+          backgroundColor: COLORS.white,
+          borderWidth: StyleSheet.hairlineWidth,
+          borderRadius: 12,
+        }}
+        placeholder="Search any restaurent here"
         value={searchText}
         onChangeText={(text) => {
-          console.log(text);
+          //   console.log(text);
           setSearchText(text);
           getRestaurents({ text: text });
         }}

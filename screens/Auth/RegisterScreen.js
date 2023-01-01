@@ -8,6 +8,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   ScrollView,
+  Alert,
   StyleSheet,
 } from "react-native";
 import { COLORS } from "../../constants";
@@ -36,15 +37,33 @@ export const RegisterScreen = ({ navigation }) => {
       }
     );
     const json = await response.json();
-    // const data = await storeData(json);
-
-    // const token = await getData("@storage_Key");
 
     setResponse(json);
-    navigation.navigate("LoginScreen");
+    // navigation.navigate("RegisterScreen");
   };
   function onRegister() {
+    console.log({ finalresponse: finalresponse.error, finalresponse });
+
     postUser();
+  }
+  if (finalresponse?.error) {
+    return Alert.alert("Error Log", "Please enter valid credentials!", [
+      {
+        text: "Cancel",
+        onPress: () => navigation.replace("RegisterScreen"),
+        style: "cancel",
+      },
+      { text: "OK", onPress: () => navigation.replace("RegisterScreen") },
+    ]);
+  } else if (finalresponse?.jwt) {
+    return Alert.alert("Congratulation:", "User is register successfully!", [
+      {
+        text: "Cancel",
+        onPress: () => navigation.replace("LoginScreen"),
+        style: "cancel",
+      },
+      { text: "OK", onPress: () => navigation.replace("LoginScreen") },
+    ]);
   }
 
   return (
