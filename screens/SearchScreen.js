@@ -1,3 +1,4 @@
+import axios from "axios";
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import {
@@ -13,6 +14,7 @@ import {
 // import { TextInput } from "react-native-paper";
 
 import { icons, SIZES, COLORS, FONTS } from "../constants";
+import { baseURL } from "./const";
 
 const Home = ({ navigation }) => {
   const location = {
@@ -30,7 +32,7 @@ const Home = ({ navigation }) => {
 
   const getCategories = async () => {
     try {
-      const response = await fetch("http://192.168.43.186:1337/categories");
+      const response = await fetch(`${baseURL}/categories`);
       const json = await response.json();
 
       setCategoryData(json);
@@ -42,25 +44,26 @@ const Home = ({ navigation }) => {
   };
   useEffect(() => {
     getCategories();
-    getRestaurents();
+    // getRestaurents();
   }, []);
 
   const getRestaurents = async ({ categoryId, text }) => {
-    var url = "http://192.168.43.186:1337/restaurants";
+    let url;
     if (categoryId) {
-      url = `${url}?categories_eq=${categoryId}`;
+      url = `${baseURL}/restaurants?categories_eq=${categoryId}`;
     }
     if (!categoryId && text) {
-      url = `${url}?title_contains=${text}`;
+      url = `${baseURL}/restaurants?title_contains=${text}`;
+      console.log({ url, cat: !categoryId, text });
     }
     if (categoryId && text) {
-      url = `${url}&title_contains=${text}`;
+      url = `${baseURL}&title_contains=${text}`;
     }
     try {
-      const response = await fetch(url);
-      const json = await response.json();
+      const res = await axios(url);
+      // const json = await response.json();
 
-      setRestaurantData(json);
+      setRestaurantData(res.data);
     } catch (error) {
       console.error(error);
     } finally {

@@ -11,6 +11,7 @@ import {
 } from "react-native";
 
 import { icons, SIZES, COLORS, FONTS } from "../constants";
+import { baseURL } from "./const";
 
 const Home = ({ navigation }) => {
   const location = {
@@ -27,7 +28,7 @@ const Home = ({ navigation }) => {
 
   const getCategories = async () => {
     try {
-      const response = await fetch("http://192.168.43.186:1337/categories");
+      const response = await fetch(`${baseURL}/categories`);
       const json = await response.json();
 
       setCategoryData(json);
@@ -43,7 +44,7 @@ const Home = ({ navigation }) => {
   }, []);
 
   const getRestaurents = async (categoryId) => {
-    var url = "http://192.168.43.186:1337/restaurants";
+    var url = `${baseURL}/restaurants`;
     if (categoryId) {
       url = `${url}?categories_eq=${categoryId}`;
     }

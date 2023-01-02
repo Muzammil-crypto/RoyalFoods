@@ -12,6 +12,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { COLORS } from "../../constants";
+import { baseURL } from "../const";
 
 export const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -20,22 +21,19 @@ export const RegisterScreen = ({ navigation }) => {
   const [finalresponse, setResponse] = useState([]);
 
   const postUser = async () => {
-    const response = await fetch(
-      "http://192.168.43.186:1337/auth/local/register",
-      {
-        method: "POST",
+    const response = await fetch(`${baseURL}/auth/local/register`, {
+      method: "POST",
 
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: name,
-          email: email,
-          password: password,
-        }),
-      }
-    );
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: name,
+        email: email,
+        password: password,
+      }),
+    });
     const json = await response.json();
 
     setResponse(json);

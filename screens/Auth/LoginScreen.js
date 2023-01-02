@@ -1,3 +1,4 @@
+import axios from "axios";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
@@ -13,6 +14,7 @@ import {
 } from "react-native";
 // import { ActivityIndicator } from "react-native-paper";
 import { COLORS } from "../../constants";
+import { baseURL, url } from "../const";
 export const storeData = async (value) => {
   try {
     const jsonValue = JSON.stringify(value);
@@ -38,43 +40,34 @@ export const LoginScreen = ({ navigation }) => {
   const [username, setUserName] = useState("");
   const [finalresponse, setResponse] = useState([]);
   const postUser = async () => {
-    const response = await fetch("http://192.168.43.186:1337/auth/local", {
-      method: "POST",
-
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    try {
+      var url = `${baseURL}/auth/local`;
+      const res = await axios.post(url, {
         identifier: email,
         password: password,
-      }),
-    });
-    const json = await response.json();
-    // console.log({ json: json?.error });
-    const data = await storeData(json);
-
-    const token = await getData("@storage_Key");
-
-    setResponse(json);
+      });
+      await storeData(res.data);
+      await getData("@storage_Key");
+      navigation.replace("Home");
+      console.log({ url });
+    } catch (error) {
+      console.log({ error });
+      return Alert.alert("Error Log", "Please enter valid credentials!", [
+        {
+          text: "Cancel",
+          onPress: () => navigation.replace("LoginScreen"),
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => navigation.replace("LoginScreen") },
+      ]);
+    }
   };
 
   function onLogin() {
-    console.log({ finalresponse: finalresponse.error, finalresponse });
     postUser();
+    console.log({ finalresponse: finalresponse.error, finalresponse });
   }
-  if (finalresponse?.error) {
-    return Alert.alert("Error Log", "Please enter valid credentials!", [
-      {
-        text: "Cancel",
-        onPress: () => navigation.replace("LoginScreen"),
-        style: "cancel",
-      },
-      { text: "OK", onPress: () => navigation.replace("LoginScreen") },
-    ]);
-  } else if (finalresponse?.jwt) {
-    navigation.replace("Home");
-  }
+
   return (
     <ScrollView style={styles.container}>
       <StatusBar />
